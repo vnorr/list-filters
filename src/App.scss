@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "IfSans";
+  src: local("IfSans"), url(./fonts/IfSans-Regular.woff) format("woff");
+}
+
+body {
+  font-family: "IfSans";
+}
+
+.product {
+  overflow: hidden;
+  padding: 1rem;
+  background-color: #f1ece8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  h3 {
+    margin: 0;
+  }
+
+  div:last-child {
+    display: flex;
+    a {
+      color: blue;
+      &:last-child {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    a:first-child {
+      text-decoration: underline;
+    }
+  }
+}
+
+.filter {
+  .filter-form {
+    display: flex;
+    flex-direction: column;
+
+    .filter-value {
+      display: flex;
+    }
+  }
+}
