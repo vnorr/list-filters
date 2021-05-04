@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Props {
   tags: string[];
@@ -9,19 +9,16 @@ interface Props {
     height: number;
   };
   setFilter: any;
+  filters: string[];
 }
 
 function Filter(props: Props) {
-  const { categories, availableFor, dimensions, setFilter } = props;
+  const { categories, availableFor, dimensions, setFilter, filters } = props;
+  const [showFilters, setShowFilters] = useState(false);
 
-  if (dimensions.width <= 700) {
-    return null;
-  }
-
-  return (
-    <div className="filter">
+  const content = (
+    <>
       <div>
-        <h3>AVAILABLE FOR USE BY</h3>
         <form className="filter-form">
           <div className="if input-wrapper">
             {availableFor.length > 0 &&
@@ -35,6 +32,7 @@ function Filter(props: Props) {
                       className="if selection-control"
                       name={ctrl}
                       value={x}
+                      checked={filters.indexOf(x) !== -1}
                       onChange={() => setFilter(x)}
                     />
                     <label htmlFor={ctrl}>{x}</label>
@@ -59,6 +57,7 @@ function Filter(props: Props) {
                       className="if selection-control"
                       name={ctrl}
                       value={x}
+                      checked={filters.indexOf(x) !== -1}
                       onChange={() => setFilter(x)}
                     />
                     <label htmlFor={ctrl}>{x}</label>
@@ -68,6 +67,28 @@ function Filter(props: Props) {
           </div>
         </form>
       </div>
+    </>
+  );
+
+  if (dimensions.width <= 700) {
+    return (
+      <div className="filter-mobile">
+        <div className="header" onClick={() => setShowFilters(!showFilters)}>
+          <h3 className="if">{`Filter By ${
+            filters.length > 0 ? `- (${filters.length})` : ""
+          }`}</h3>
+          <i
+            className={`if icon ui chevron-${showFilters ? "down" : "left"}`}
+          ></i>
+        </div>
+        {showFilters && <>{content}</>}
+      </div>
+    );
+  }
+
+  return (
+    <div className="if col-3--xs">
+      <div className="filter">{content}</div>
     </div>
   );
 }

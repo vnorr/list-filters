@@ -24,7 +24,6 @@ function App() {
     width: window.innerWidth,
   });
   const [filters, setFilters] = React.useState<string[]>([]);
-
   React.useEffect(() => {
     function handleResize() {
       setDimensions({
@@ -57,15 +56,14 @@ function App() {
       <div className="if block">
         <div className="if grid">
           <div className="if row">
-            <div className="if col-3--xs">
-              <Filter
-                tags={tags}
-                categories={categories}
-                availableFor={availableFor}
-                dimensions={dimensions}
-                setFilter={(val: string) => setFilter(val)}
-              />
-            </div>
+            <Filter
+              tags={tags}
+              categories={categories}
+              availableFor={availableFor}
+              dimensions={dimensions}
+              setFilter={(val: string) => setFilter(val)}
+              filters={filters}
+            />
             <div
               className={`if col-${dimensions.width < 700 ? "12" : "9"}--xs`}
             >
